@@ -12,6 +12,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>First release of Resultix! Read the ReadMe for more info.</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/ieuangriffiths97/Resultix</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
