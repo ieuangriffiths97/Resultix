@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Title>Resultix</Title>
+    <Authors>Ieuan97</Authors>
+    <Description>Stupidly simple result pattern for .NET</Description>
+    <Copyright>Ieuan Griffiths 2024</Copyright>
+    <PackageProjectUrl>https://github.com/ieuangriffiths97/Resultix</PackageProjectUrl>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
 </Project>

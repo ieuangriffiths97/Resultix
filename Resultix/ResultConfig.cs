@@ -1,5 +1,8 @@
 namespace Resultix
 {
+	/// <summary>
+	/// Global config class
+	/// </summary>
 	public class ResultConfig
 	{
 		/// <summary>
