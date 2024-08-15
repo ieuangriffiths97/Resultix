@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Resultix.Tests;
 
@@ -59,7 +60,47 @@ public class EnforcedMatchTests
         });
     }
 
+    [TestMethod]
+    public void Match_None_Default()
+    {
+        Result<string> result = default;
+        var wasCalled = false;
+
+        result.Match(_ => throw new NotImplementedException(),
+                     _ => throw new NotImplementedException(),
+                     () => wasCalled = true);
+
+        Assert.IsTrue(wasCalled);
+    }
+
+    [TestMethod]
+    public async Task MatchAsync_None_Default()
+    {
+        Result<string> result = default;
+
+        var resolved = await result.MatchAsync(_ => Task.Run(() => ThrowExBool()),
+                                               _ => Task.Run(() => ThrowExBool()),
+                                              () => Task.Run(() => true));
+
+        Assert.IsTrue(resolved);
+    }
+
+    [TestMethod]
+    public async Task MatchAsync_None_Default_NoReturn()
+    {
+        Result<string> result = default;
+        var wasCalled = false;
+
+        await result.MatchAsync(_ => Task.Run(() => throw new NotImplementedException()),
+                                _ => Task.Run(() => throw new NotImplementedException()),
+                                () => Task.Run(() => wasCalled = true));
+
+        Assert.IsTrue(wasCalled);
+        
+    }
+
     #endregion
 
-    // todo - just need to do a set of tests for task.
+    private bool ThrowExBool()
+        => throw new NotImplementedException();
 }

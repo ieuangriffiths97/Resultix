@@ -142,8 +142,8 @@ public class UnenforcedMatchTests
         Result<int> result = num;
 
         var resolved = await result.MatchAsync(r => Task.FromResult(r),
-                                               _ => Task.Run(() => ThrowIntEx("onError should not be called")),
-                                               () => Task.Run(() => ThrowIntEx("onNone should not be called")));
+                                               _ => Task.Run(() => ThrowExInt("onError should not be called")),
+                                               () => Task.Run(() => ThrowExInt("onNone should not be called")));
 
         Assert.AreEqual(num, resolved);
     }
@@ -154,9 +154,9 @@ public class UnenforcedMatchTests
         var ex = new Exception("Test");
         Result<int> result = ex;
 
-        var resolved = await result.MatchAsync(_ => Task.Run(() => ThrowIntEx("onSuccess should not be called")),
+        var resolved = await result.MatchAsync(_ => Task.Run(() => ThrowExInt("onSuccess should not be called")),
                                                _ => Task.Run(() => 2),
-                                               () => Task.Run(() => ThrowIntEx("onNone should not be called")));
+                                               () => Task.Run(() => ThrowExInt("onNone should not be called")));
 
         Assert.AreEqual(2, resolved);
     }
@@ -166,8 +166,8 @@ public class UnenforcedMatchTests
     {
         Result<string?> result = default(string);
 
-        var resolved = await result.MatchAsync(_ => Task.Run(() => ThrowStringEx("onSuccess should not be called")),
-                                               _ => Task.Run(() => ThrowStringEx("onError should not be called")),
+        var resolved = await result.MatchAsync(_ => Task.Run(() => ThrowExString("onSuccess should not be called")),
+                                               _ => Task.Run(() => ThrowExString("onError should not be called")),
                                                () => Task.Run(() => "Test!"));
 
         Assert.AreEqual("Test!", resolved);
@@ -176,9 +176,9 @@ public class UnenforcedMatchTests
     #endregion
 
 
-    private string ThrowStringEx(string message)
+    private string ThrowExString(string message)
         => throw new Exception(message);
 
-    private int ThrowIntEx(string message)
+    private int ThrowExInt(string message)
         => throw new Exception(message);
 }
